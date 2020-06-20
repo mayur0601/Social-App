@@ -1,0 +1,17 @@
+#layout-footer {
+  color: white;
+  z-index: 1;
+  background: #009688;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: flex-start; }
+  #layout-footer a {
+    color: white;
+    text-decoration: none; }
+  #layout-footer .footer-nav {
+    margin-left: 20%; }
+    #layout-footer .footer-nav ul {
+      display: flex;
+      list-style: none; }
+      #layout-footer .footer-nav ul li {
+        margin-right: 30px; }
