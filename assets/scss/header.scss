@@ -1,31 +1,56 @@
-#layout-header {
-    nav {
-        display: flex;
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    background: #2196F3;
+    color: white;
+    box-shadow: 1px 1px 1px 1px lightgrey;
+    .inner {
+        height: 40px;
+        display: flex !important;
+        flex-wrap: nowrap;
         justify-content: space-between;
-        padding: 0 10px;
-        background: #009688;
-        color: white;
-        box-shadow: 1px 1px 1px 1px lightgrey;
-        .mini-logo {
-            p {
-                margin: 5px;
-                font-size: 1.4rem;
-                font-weight: bold;
+        .head {
+            // margin-top: 3px;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 5px;
+            font-size: 25px;
+            font-weight: bolder;
+            a {
+                text-decoration: none;
+                color: white;
             }
         }
-        .auth-links {
-            ul {
-                margin: 5% 5px;
-                display: flex;
-                list-style: none;
-                li {
-                    margin-right: 10px;
+        .head-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+            // margin-top: 16px;
+            margin-right: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            .chaticon {
+                padding-top: 5px;
+                padding-right: 5px;
+            }
+            .chaticon i:hover {
+                cursor: pointer;
+            }
+            .text {
+                margin-left: 10px;
+                text-transform: capitalize;
+                a {
+                    text-decoration: none;
+                    color: white;
+                }
+                a:hover {
+                    text-decoration: none;
+                    cursor: pointer;
                 }
             }
         }
-        a {
-            color: white;
-            text-decoration: none;
-        }
+    }
+    .bar {
+        height: 5px;
+        background-color: #eeeeee;
     }
 }

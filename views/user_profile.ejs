@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/user_profile.css">
+<link rel="stylesheet" href="/css/header.css">
 
 <img src="<%= user.avatar %>" alt="<%= user.name %>" width="100">
 
@@ -11,11 +12,15 @@
         <input type="email" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
 
         <input type="file" name="avatar" placeholder="Profile Picture">
-        <input type="submit"  value="Update">
+        <input type="submit" value="Update">
     </form>
-    
-<%}else{%>    
-    <!-- else show only the profile info -->
-    <p><%= profile_user.name %></p>
-    <p><%= profile_user.email %></p>
-<%} %>
+
+    <%}else{%>
+        <!-- else show only the profile info -->
+        <p>
+            <%= profile_user.name %>
+        </p>
+        <p>
+            <%= profile_user.email %>
+        </p>
+        <%} %>
