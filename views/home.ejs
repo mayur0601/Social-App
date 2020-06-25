@@ -8,52 +8,52 @@
 <link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="/css/chat_box.css">
 
-<div id="home-container" class="container-fluid">
-
-    <div class="empty">
-        <div class="inner card ml-3">
-            <div class="cover-picture">
-            </div>
-
-            <a href="/users/profile/<%= locals.user.id %>" class="locals-user-link">
-                <div class="user-pic">
-                    <% if(locals.user.avatar){ %>
-                        <img class="rounded-circle mx-5" width="70" height="70" src="<%= locals.user.avatar %>" alt="">
-                        <% } else{ %>
-                            <img class="rounded-circle mx-5" width="70" src="<%= assetPath('images/no_profile.jpg') %>" alt="">
-                            <% } %>
+<% if(locals.user){ %>
+    <div id="home-container" class="container-fluid">
+        <div class="empty">
+            <div class="inner card ml-3">
+                <div class="cover-picture">
                 </div>
 
-                <div class="card-body text-capitalize">
-                    <h5 class="card-title text-center">
-                        <%= locals.user.name %>
-                    </h5>
+                <a href="/users/profile/<%= locals.user.id %>" class="locals-user-link">
+                    <div class="user-pic">
+                        <% if(locals.user.avatar){ %>
+                            <img class="rounded-circle mx-5" width="70" height="70" src="<%= locals.user.avatar %>" alt="">
+                            <% } else{ %>
+                                <img class="rounded-circle mx-5" width="70" src="" alt="">
+                                <% } %>
+                    </div>
+
+                    <div class="card-body text-capitalize">
+                        <h5 class="card-title text-center">
+                            <%= locals.user.name %>
+                        </h5>
+                    </div>
+                </a>
+
+                <div class="text-muted small friendlist">
+                    <span>
+                        friendlist
+                    </span>
+                    <span class="length">
+                        <%= locals.user.friendships.length %>
+                    </span>
                 </div>
-            </a>
 
-            <div class="text-muted small friendlist">
-                <span>
-                    friendlist
-                </span>
-                <span class="length">
-                    <%= locals.user.friendships.length %>
-                </span>
+                <div class="text-muted small friendlist">
+                    <span>
+                        email
+                    </span>
+                    <span class="length">
+                        <%= locals.user.email%>
+                    </span>
+                </div>
             </div>
 
-            <div class="text-muted small friendlist">
-                <span>
-                    email
-                </span>
-                <span class="length">
-                    <%= locals.user.email%>
-                </span>
-            </div>
+
         </div>
 
 
-    </div>
-
-    <section id="feed-posts">
         <div class="row posts">
             <div class="mx-3 posts-size">
                 <!-- - \\\\\\\Post-->
@@ -87,7 +87,7 @@
 
                     <% for(post of posts){ %>
 
-                        <%- include('_post') -%>
+                        <%- include('_post') %>
 
                             <% } %>
 
@@ -95,46 +95,79 @@
                 </div>
             </div>
         </div>
-    </section>
 
 
-    <section class="users list-group" id="user-friends">
-        <h4>All Users</h4>
-        <div class="box-size">
-            <% for(u of all_users){%>
-                <p class="list-group-item">
-                    <% if(u.avatar){ %>
-                        <img class="rounded-circle" width="45" height="45" src="<%= u.avatar %>" alt="">
-                        <% } else{ %>
-                            <img class="rounded-circle" width="45" src="<%= assetPath('images/no_profile.jpg') %>" alt="">
+        <section id="user-friends">
+            <!-- changinf this &********************** -->
+
+            <div class="inner">
+                <div class="friends list-group">
+                    <h4>FRIENDS</h4>
+
+                    <div class="box-size">
+                        <% for(let friends of friendships){ %>
+
+                            <p class="list-group-item">
+                                <% if(friends.avatar){ %>
+                                    <img class="rounded-circle" width="45" height="45" src="<%= friends.avatar %>" alt="">
+                                    <% } else{ %>
+                                        <img class="rounded-circle" width="45" src="<%= assetPath('images/no_profile.jpg') %>" alt="">
+                                        <% } %>
+                                            <a class="ml-2" href="/users/profile/<%= friends.id %>">
+                                                <%= friends.name %>
+                                            </a>
+                            </p>
+
                             <% } %>
-                                <a class="ml-2" href="/users/profile/<%= u.id %>">
-                                    <%= u.name %>
-                                </a>
-                </p>
-                <% } %>
-        </div>
-    </section>
+                    </div>
 
-    <!-- <%- include('_chat_box') -%> -->
-</div>
 
-<!-- importing this script for creating the comments -->
-<script src="/js/home_post_comments.js"></script>
-<script src="/js/home_posts.js"></script>
+                </div>
 
-<!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
-<script src="js/toggle_likes.js"></script>
-<script>
-    $('.toggle-like-button').each(function() {
-        let self = this;
-        let toggleLike = new ToggleLike(self);
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-<script src="/js/chat_engine.js"></script>
-<% if (locals.user){ %>
-    <script>
-        new ChatEngine('user-chat-box', '<%= locals.user.email %>')
-    </script>
-    <% } %>
+                <div class="users list-group">
+                    <h4>ALL USERS</h4>
+
+                    <div class="box-size">
+                        <% for(u of all_users){%>
+                            <p class="list-group-item">
+                                <% if(u.avatar){ %>
+                                    <img class="rounded-circle" width="45" height="45" src="<%= u.avatar %>" alt="">
+                                    <% } else{ %>
+                                        <img class="rounded-circle" width="45" src="" alt="">
+                                        <% } %>
+                                            <a class="ml-2" href="/users/profile/<%= u.id %>">
+                                                <%= u.name %>
+                                            </a>
+                            </p>
+                            <% } %>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+
+    </div>
+
+    <%}%>
+
+        <!-- importing this script for creating the comments -->
+        <script src="/js/home_post_comments.js"></script>
+        <script src="/js/home_posts.js"></script>
+
+        <!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+        <script src="js/toggle_likes.js"></script>
+        <script>
+            $('.toggle-like-button').each(function() {
+                let self = this;
+                let toggleLike = new ToggleLike(self);
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+        <script src="/js/chat_engine.js"></script>
+        <% if (locals.user){ %>
+            <script>
+                new ChatEngine('user-chat-box', '<%= locals.user.email %>')
+            </script>
+            <% } %>
